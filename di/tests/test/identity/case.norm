@@ -1,0 +1,57 @@
+package di.test.identity
+
+import std.testing.Test
+
+import di.Container
+import jakarta.inject.Inject
+import jakarta.inject.Singleton
+import std.core.Exception
+
+@Singleton()
+class Service {
+  Integer value = 41
+}
+
+@Singleton()
+class Consumer {
+  @Inject()
+  private Service service
+
+  Integer read() { service.value }
+}
+
+class ExistingConsumer {
+  @Inject()
+  private Service service
+  String title
+
+  String read() { title + ":" + service.value.toString() }
+}
+
+@Test()
+Void injectsFieldsAndRejectsClosedContainer() {
+  var container = Container()
+  var first = container.get<Consumer>()
+  var second = container.get<Consumer>()
+  require(condition: first == second, message: "singleton identity changed")
+  require(condition: first.read() == 41, message: "field dependency or initializer missing")
+  container.get<Service>().value = 42
+  require(condition: first.read() == 42, message: "field injection did not preserve identity")
+  var detached = Consumer()
+  var injected = container.inject(detached)
+  require(condition: injected == detached && detached.read() == 42,
+    message: "existing object must receive the container dependency without replacement")
+  container.get<Service>().value = 43
+  require(condition: detached.read() == 43 && first.read() == 43,
+    message: "existing and container-created objects must share dependencies")
+  var component = ExistingConsumer(title: "组件状态")
+  container.inject(component)
+  require(condition: component.read() == "组件状态:43", message: "field annotations must inject an existing unscoped component")
+  container.close()
+  Boolean rejected = false
+  try { container.get<Service>() } catch Exception error { rejected = true }
+  require(condition: rejected, message: "closed container accepted a lookup")
+  rejected = false
+  try { container.inject(detached) } catch Exception error { rejected = true }
+  require(condition: rejected, message: "closed container accepted injection")
+}

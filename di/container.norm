@@ -1,0 +1,48 @@
+package di
+
+import micronaut.inject.context.ApplicationContext
+import micronaut.inject.context.applicationContextRun
+import micronaut.inject.javaStringArrayNew
+import std.collections.MutableMap
+import std.configuration.configurationProperties
+import std.core.Exception
+import std.io.Resource
+
+class Container implements Resource {
+  private ApplicationContext context
+  private Boolean closed = false
+
+  Container(MutableMap<String?, Any?>? properties = null) {
+    var started = if properties == null {
+      applicationContextRun()
+    } else {
+      applicationContextRun(arg0: properties, arg1: javaStringArrayNew(size: 0))
+    }
+    if started == null { throw Exception(message: "Dependency container did not start") }
+    context = started
+  }
+
+  T get<T>() {
+    if closed { throw Exception(message: "Dependency container is closed") }
+    var instance = context.getBean<T>(T.class)
+    if instance == null { throw Exception(message: "Dependency was not created") }
+    instance
+  }
+
+  T inject<T>(T instance) {
+    if closed { throw Exception(message: "Dependency container is closed") }
+    var injected = context.inject<T>(instance)
+    if injected == null { throw Exception(message: "Dependency injection did not return an instance") }
+    injected
+  }
+
+  Void close() {
+    if closed { return }
+    closed = true
+    context.close()
+  }
+}
+
+Container startContainer<C>(C config) {
+  Container(properties: configurationProperties(value: config))
+}

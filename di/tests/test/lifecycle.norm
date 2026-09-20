@@ -1,0 +1,43 @@
+package di.test
+
+import di.Container
+import jakarta.inject.Inject
+import jakarta.inject.Singleton
+import jakarta.annotation.PostConstruct
+import jakarta.annotation.PreDestroy
+import std.testing.Test
+
+@Singleton()
+class Service {
+  Integer initialized = 0
+  Integer closed = 0
+
+  @PostConstruct()
+  Void start() { initialized = initialized + 1 }
+
+  @PreDestroy()
+  Void stop() { closed = closed + 1 }
+}
+
+class Component {
+  @Inject()
+  private Service service
+
+  Service dependency() { service }
+}
+
+@Test()
+Void managesAnnotatedLifecycleAndExistingObjects() {
+  var container = Container()
+  var service = container.get<Service>()
+  try {
+    var component = Component()
+    require(condition: container.inject(component) == component, message: "injection replaced component identity")
+    require(condition: component.dependency() == service, message: "field injection lost singleton identity")
+    require(condition: service.initialized == 1, message: "post construct did not execute exactly once")
+  } finally {
+    container.close()
+  }
+  container.close()
+  require(condition: service.closed == 1, message: "pre destroy did not execute exactly once")
+}

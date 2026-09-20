@@ -1,0 +1,36 @@
+package di.test.configuration
+
+import std.testing.Test
+
+import di.startContainer
+import jakarta.inject.Singleton
+import micronaut.inject.context.annotation.Property
+import std.serialization.Serializable
+
+@Serializable()
+value GreetingConfig {
+  String greeting
+}
+
+@Singleton()
+class Greeting {
+  @Property(name: "greeting")
+  private String message = ""
+
+  String text() { message }
+}
+
+@Test()
+Void isolatesTypedConfiguration() {
+  var first = startContainer(config: GreetingConfig(greeting: "中文配置"))
+  var second = startContainer(config: GreetingConfig(greeting: "另一个容器"))
+  try {
+    require(condition: first.get<Greeting>().text() == "中文配置", message: "Typed configuration reaches field injection")
+    require(condition: second.get<Greeting>().text() == "另一个容器", message: "Containers isolate configuration")
+    first.close()
+    require(condition: second.get<Greeting>().text() == "另一个容器", message: "Closing one container leaves the other alive")
+  } finally {
+    first.close()
+    second.close()
+  }
+}
