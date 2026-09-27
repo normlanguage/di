@@ -2,7 +2,7 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
-需要 Norm 0.24。模块身份和依赖见 [module.norm](di/module.norm)。
+模块身份和依赖见 [module.norm](di/module.norm)，发布使用的工具链见[工作流](.github/workflows/package.yml)。
 
 构建：`norm package di --output build/repository`。
 
