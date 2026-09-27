@@ -7,3 +7,5 @@ Requires Norm 0.24. Module identity and dependencies: [module.norm](di/module.no
 Build: `norm package di --output build/repository`.
 
 Tests: `norm test di`.
+
+[Samples](samples/README.md) show a standalone consumer with singleton field injection and container lifecycle.

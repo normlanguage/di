@@ -1,0 +1,29 @@
+import di.Container
+import jakarta.inject.Inject
+import jakarta.inject.Singleton
+
+@Singleton()
+class Greeting {
+  String text() { "Hello from DI" }
+}
+
+@Singleton()
+class Greeter {
+  @Inject()
+  private Greeting greeting
+
+  String message() { greeting.text() }
+}
+
+main() {
+  Container container = Container()
+  try {
+    printLine(container.get<Greeter>().message())
+  } finally {
+    container.close()
+  }
+}
+
+Module module() {
+  module(dependencies: [dependency(repository: "github", name: "di", version: 2)])
+}
