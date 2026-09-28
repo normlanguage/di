@@ -1,8 +1,8 @@
 Module module() {
-  module(name: "di", version: 2, exports: ["container"], dependencies: [
-    exportedDependency(repository: "github", name: "jakarta.inject", version: 3),
-    exportedDependency(repository: "github", name: "jakarta.annotation", version: 2),
-    exportedDependency(repository: "github", name: "micronaut.inject", version: 3),
+  module(name: "di", version: 3, exports: ["container"], dependencies: [
+    exportedDependency(repository: "github", name: "jakarta.inject", version: 4),
+    exportedDependency(repository: "github", name: "jakarta.annotation", version: 3),
+    exportedDependency(repository: "github", name: "micronaut.inject", version: 4),
     dependency(repository: "github", name: "micronaut.inject.processor", version: 4)
   ])
 }
