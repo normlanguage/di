@@ -25,5 +25,5 @@ main() {
 }
 
 Module module() {
-  module(dependencies: [dependency(repository: "github", name: "di", version: 3)])
+  module(dependencies: [dependency(repository: "github", name: "di", version: 4)])
 }
