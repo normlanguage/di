@@ -3,7 +3,7 @@ package di
 import micronaut.inject.context.ApplicationContext
 import micronaut.inject.context.applicationContextRun
 import micronaut.inject.javaStringArrayNew
-import std.collections.MutableMap
+import java.base.util.JavaMap
 import std.configuration.configurationProperties
 import std.core.Exception
 import std.io.Resource
@@ -12,11 +12,11 @@ class Container implements Resource {
   private ApplicationContext context
   private Boolean closed = false
 
-  Container(MutableMap<String?, Any?>? properties = null) {
+  Container(JavaMap<String, Any>? properties = null) {
     var started = if properties == null {
       applicationContextRun()
     } else {
-      applicationContextRun(arg0: properties, arg1: javaStringArrayNew(size: 0))
+      applicationContextRun(arg0: properties!!, arg1: javaStringArrayNew(size: 0))
     }
     if started == null { throw Exception(message: "Dependency container did not start") }
     context = started
