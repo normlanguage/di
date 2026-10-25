@@ -4,7 +4,7 @@ Module module() {
     exportedDependency(repository: "github", name: "jakarta.inject", version: 10),
     exportedDependency(repository: "github", name: "jakarta.annotation", version: 8),
     exportedDependency(repository: "github", name: "micronaut.inject", version: 15),
-    dependency(repository: "github", name: "micronaut.inject.processor", version: 12),
+    dependency(repository: "github", name: "micronaut.inject.processor", version: 13),
     dependency(repository: "github", name: "netty.buffer", version: 2)
   ])
 }
