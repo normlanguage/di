@@ -1,5 +1,5 @@
 Module module() {
-  module(name: "di", version: 5, exports: ["container"], dependencies: [
+  module(name: "di", version: 6, exports: ["container"], dependencies: [
     dependency(repository: "norm", name: "java.base", version: 1),
     exportedDependency(repository: "github", name: "jakarta.inject", version: 8),
     exportedDependency(repository: "github", name: "jakarta.annotation", version: 6),
@@ -8,6 +8,7 @@ Module module() {
     dependency(repository: "github", name: "netty.buffer", version: 1)
   ])
 }
+
 
 
 
