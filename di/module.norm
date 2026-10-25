@@ -3,10 +3,11 @@ Module module() {
     dependency(repository: "norm", name: "java.base", version: 1),
     exportedDependency(repository: "github", name: "jakarta.inject", version: 8),
     exportedDependency(repository: "github", name: "jakarta.annotation", version: 6),
-    exportedDependency(repository: "github", name: "micronaut.inject", version: 8),
+    exportedDependency(repository: "github", name: "micronaut.inject", version: 10),
     dependency(repository: "github", name: "micronaut.inject.processor", version: 8)
   ])
 }
+
 
 
 
