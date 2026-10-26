@@ -16,4 +16,4 @@ jobs:
   package:
     uses: normlanguage/registry/.github/workflows/package.yml@c42fcb813fd549d179896d358eb774543a9b6c0d
     with:
-      norm-source-ref: 6a511163d404d76f9bbd61040585be13779d9705
+      norm-source-ref: faf0729e65c8f15fee92bdfa1d083350b5703847
