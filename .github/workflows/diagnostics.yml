@@ -20,8 +20,14 @@ jobs:
           find "$HOME/.norm" -type f -path '*/META-INF/micronaut/io.micronaut.inject.BeanDefinitionReference/*' -print 2>/dev/null | sort | tail -n 200 || true
           echo '--- generated resources before test (workspace) ---'
           find . -type f -path '*/META-INF/micronaut/io.micronaut.inject.BeanDefinitionReference/*' -print 2>/dev/null | sort | tail -n 200 || true
+          (while true; do
+            find /tmp -type f -path '*/META-INF/micronaut/io.micronaut.inject.BeanDefinitionReference/*' -print 2>/dev/null | sort -u
+            sleep 0.05
+          done) &
+          watcher=$!
           norm test di
           status=$?
+          kill "$watcher" 2>/dev/null || true
           echo "TEST_STATUS=$status"
           echo '--- generated resources after test ---'
           find "$HOME/.norm" -type f -path '*/META-INF/micronaut/io.micronaut.inject.BeanDefinitionReference/*' -print 2>/dev/null | sort | tail -n 200 || true
