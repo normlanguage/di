@@ -1,5 +1,5 @@
 Module module() {
-  module(name: "di", version: 9, exports: ["container"], dependencies: [
+  module(name: "di", version: 10, exports: ["container"], dependencies: [
     dependency(repository: "norm", name: "java.base", version: 1),
     exportedDependency(repository: "github", name: "jakarta.inject", version: 10),
     exportedDependency(repository: "github", name: "jakarta.annotation", version: 8),
