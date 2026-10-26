@@ -1,6 +1,6 @@
 # di Skill
 
-Use this skill to work with Norm module `di` version 8. Use only declarations listed below.
+Use this skill to work with Norm module `di` version 9. Use only declarations listed below.
 
 ## `di`
 
