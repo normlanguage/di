@@ -1,6 +1,6 @@
 # di Skill
 
-Use this skill to work with Norm module `di` version 7. Use only declarations listed below. Runtime dependencies include `netty.buffer` version 7, `micronaut.inject` version 7, and `micronaut.inject.processor` version 7.
+Use this skill to work with Norm module `di` version 10. Use only declarations listed below.
 
 ## `di`
 
@@ -39,7 +39,4 @@ Void close()
 ```norm
 Container startContainer<C>(C config)
 ```
-
-
-
 
