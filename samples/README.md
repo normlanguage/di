@@ -10,4 +10,4 @@ From the repository root, run:
 norm run samples/hello.norm
 ```
 
-Expected program output: `Hello from DI`. Micronaut may also print an SLF4J no-provider warning to stderr.
+Expected program output: `Hello from DI`.

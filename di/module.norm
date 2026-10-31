@@ -1,11 +1,11 @@
 Module module() {
-  module(name: "di", version: 10, exports: ["container"], dependencies: [
+  module(name: "di", version: 11, exports: ["container"], dependencies: [
     dependency(repository: "norm", name: "java.base", version: 1),
-    exportedDependency(repository: "github", name: "jakarta.inject", version: 10),
-    exportedDependency(repository: "github", name: "jakarta.annotation", version: 8),
-    exportedDependency(repository: "github", name: "micronaut.inject", version: 15),
-    exportedDependency(repository: "github", name: "micronaut.inject.processor", version: 13),
-    dependency(repository: "github", name: "netty.buffer", version: 2)
+    exportedDependency(repository: "github", name: "jakarta.inject", version: 11),
+    exportedDependency(repository: "github", name: "jakarta.annotation", version: 9),
+    exportedDependency(repository: "github", name: "micronaut.inject", version: 16),
+    exportedDependency(repository: "github", name: "micronaut.inject.processor", version: 14),
+    dependency(repository: "github", name: "netty.buffer", version: 3)
   ])
 }
 
