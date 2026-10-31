@@ -10,4 +10,4 @@
 norm run samples/hello.norm
 ```
 
-预期程序输出：`Hello from DI`。Micronaut 也可能在标准错误输出中提示没有 SLF4J provider。
+预期程序输出：`Hello from DI`。
